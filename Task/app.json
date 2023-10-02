@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Task",
+    "slug": "Task",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/pastaLogo02.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/pastaLogo02.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/pastaLogo03.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
