@@ -2,10 +2,10 @@ import React from 'react';
 import { View ,Text,StyleSheet} from 'react-native';
 
 
-function Atividades() {
+function Projetos() {
     return ( 
         <View style={styles.Container}>
-            <Text> Atividades </Text>
+            <Text> Projetos </Text>
         </View>
      );
 }
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default Atividades;
+export default Projetos;
