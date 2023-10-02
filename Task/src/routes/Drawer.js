@@ -3,12 +3,13 @@ import Home from '../screens/Home';
 import NovaAtividade from '../screens/NovaAtividade';
 import Atividades from '../screens/Atividades';
 import Projetos from '../screens/Projetos';
+import DrawerStyle from '../styles/DrawerStyle'
 
 const Drawer = createDrawerNavigator();
 
 export default function MyDrawer() {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator drawerContent={props => <DrawerStyle {...props}/>}>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Projetos" component={Projetos} />
       <Drawer.Screen name="Atividades" component={Atividades} />
