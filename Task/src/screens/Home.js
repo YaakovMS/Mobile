@@ -5,10 +5,7 @@ import { View ,Text,StyleSheet} from 'react-native';
 function Home() {
     return ( 
         <View style={styles.Container}>
-
             <Text> Home </Text>
-            
-
         </View>
      );
 }
