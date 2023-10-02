@@ -1,16 +1,15 @@
-// AppNavigator.js (ou outro nome de sua escolha)
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import DrawerNavigator from './navigators/DrawerNavigator';
-import StackNavigator from './navigators/StackNavigator';
-import AuthContext from './context/AuthContext'; // Importe seu contexto de autenticação
+import MyDrawer from './Drawer';
+import MyStack from './Stack';
+import { useAuth } from '../context/AuthContext';// Importe o hook useAuth
 
 export default function AppNavigator() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { registeredUser } = useAuth();
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <DrawerNavigator /> : <StackNavigator />}
+      {registeredUser ? <MyDrawer /> : <MyStack />}
     </NavigationContainer>
   );
 }

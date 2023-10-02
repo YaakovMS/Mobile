@@ -4,6 +4,7 @@ import { Text, Icon, Input, Button } from 'react-native-elements';
 
 import { useAuth } from '../context/AuthContext';
 
+
 const Login = ({ navigation }) => {
   const { registeredUser, login } = useAuth();
   const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ const Login = ({ navigation }) => {
     return Object.values(newErrors).every((error) => !error);
   };
 
-  const handleLogin = () => {
+  const handleLogin = ({navigation}) => {
     if (validateForm()) {
       if (registeredUser && registeredUser.email === email && registeredUser.password === password) {
         console.log('Logado');
