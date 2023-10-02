@@ -1,38 +1,95 @@
-import React from "react";
-import { View, Text, StyleSheet ,Image} from "react-native";
+import React, { useState } from "react";
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
+import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-const DrawerStyle = (props) => {
+import { useAuth } from "../context/AuthContext";
+
+const GavetaStyle = (props) => {
+  const { registeredUser, user } = useAuth();
+
+  // Add a conditional check to prevent accessing properties of null
+  const userName = registeredUser ? registeredUser.name : "";
+  const userEmail = registeredUser ? registeredUser.email : "";
+
+  // Use state to toggle between sun and moon icons
+  const [isSun, setIsSun] = useState(true);
+
+  // Dummy data for projects and activities
+  const numProjects = 5; // Replace with the actual number of projects
+  const numActivities = 10; // Replace with the actual number of activities
+
+  const toggleDayNight = () => {
+    setIsSun(!isSun);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image  style={styles.UserImage}  source={require('../assets/user.png')}/>
-        <Text style={styles.userName}>User.Name</Text>
-        <Text style={styles.userMail}>User@mail.com</Text>
-        <View style={styles.Counter}>
-        <Text style={styles.ProjectsCounter}>Projetos: 5</Text>
-        <Text style={styles.AtividadesCounter}>Atividades: 13</Text>
+        <View style={styles.userInfoContainer}>
+          <Image
+            source={require("../assets/user.png")}
+            style={styles.userImage}
+          ></Image>
+          <View style={styles.userInfo}>
+            <Text style={styles.userName}>{userName}</Text>
+            <Text style={styles.userEmail}>{userEmail}</Text>
+          </View>
+        </View>
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Ionicons
+              name="clipboard-outline"
+              size={24}
+              color="white"
+              style={styles.statIcon}
+            />
+            <Text style={styles.statText}>{numProjects} Projects</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Ionicons
+              name="document-text-outline"
+              size={24}
+              color="white"
+              style={styles.statIcon}
+            />
+            <Text style={styles.statText}>{numActivities} Activities</Text>
+          </View>
         </View>
       </View>
-      <DrawerContentScrollView {...props} style={styles.drawerContent}>
-        <View style={styles.ItemList}>
+      <DrawerContentScrollView
+        {...props}
+        style={styles.drawerContent}
+        contentContainerStyle={styles.drawerContentContainer}
+      >
         <DrawerItemList {...props} />
-        </View>
       </DrawerContentScrollView>
-      <View style={styles.bottomText}>
-        <DrawerItem
-          label="Share"
-          onPress={() => {
-            // Lógica para compartilhar
-          }}
-          icon={({ color, size }) => (
-            <Text style={{ color, fontSize: size }}></Text>
-          )}
-        />
+      <View style={styles.bottomMenu}>
+        <TouchableOpacity
+          onPress={toggleDayNight}
+          style={styles.bottomMenuItem}
+        >
+          <Ionicons
+            name={isSun ? "sunny-outline" : "moon-outline"}
+            size={22}
+            color="#4B5F83"
+          />
+          <Text style={styles.bottomMenuItemText}>
+            {isSun ? "Day" : "Night"}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}} style={styles.bottomMenuItem}>
+          <Ionicons
+            name="share-social-outline"
+            size={22}
+            color="#4B5F83"
+          />
+          <Text style={styles.bottomMenuItemText}>Tell a friend</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -41,60 +98,73 @@ const DrawerStyle = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#D9D9D9", // Cor de fundo clara
   },
   header: {
-    padding: 50,
-    paddingLeft:20,
-    borderBottomColor: "#fff",
+    backgroundColor: "#4B5F83", // Cor de fundo do cabeçalho
+    paddingVertical: 40, // Aumento do tamanho do cabeçalho
+    paddingHorizontal: 10,
+    borderBottomColor: "#4B5F83",
     borderBottomWidth: 1,
-    backgroundColor:'#4B5F83'
-  },
-  UserImage:{
-    padding:30,
-    height:20,
-    width:20,
-
-  },
-
-  userName: {
-    color: "#fff",
-    fontSize: 25,
-    fontSize:18,
-  },
-  userMail:{
-fontSize:18,
-color:'#fff'
-
-  },
-
-  Counter:{
-    flexDirection:'row',
-    paddingTop:10,
-    justifyContent:'space-around',
-    alignItems:'start'
- 
-  },
-  ProjectsCounter:{
-    color:'#fff',
-    fontSize:15
-  },
-  AtividadesCounter:{
-    color:'#fff'
-  },
-
-  ItemList:{
-
-
   },
   drawerContent: {
     flex: 1,
   },
-  bottomText: {
-    padding: 16,
-    borderTopColor: "#fff",
+  drawerContentContainer: {
+    // Estilos para o conteúdo da lista de rotas
+  },
+  userInfoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  userImage: {
+    height: 80,
+    width: 80,
+    borderRadius: 30,
+    marginBottom: 10,
+  },
+  userInfo: {
+    marginLeft: 10,
+  },
+  userName: {
+    color: "#fff",
+    fontSize: 20,
+  },
+  userEmail: {
+    color: "#fff",
+    fontSize: 15,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  statItem: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statIcon: {
+    marginRight: 5,
+  },
+  statText: {
+    color: "#fff",
+    fontSize: 15,
+  },
+  bottomMenu: {
+    padding: 10,
+    borderTopColor: "#4B5F83",
     borderTopWidth: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  bottomMenuItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 20,
+  },
+  bottomMenuItemText: {
+    fontSize: 15,
+    color: "#4B5F83"
   },
 });
 
-export default DrawerStyle;
+export default GavetaStyle;
