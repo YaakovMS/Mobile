@@ -12,19 +12,22 @@ const Drawer = createDrawerNavigator();
 export default function MyDrawer() {
   return (
     <Drawer.Navigator
-    drawerContent={(props) => <DrawerStyle {...props} />}
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: '#4B5F83', // Cor de fundo do cabeçalho
-      },
-      headerTintColor: '#D9D9D9', // Cor do texto do cabeçalho
-      headerTitleStyle: {
-        fontWeight: 'bold', // Estilo do texto do cabeçalho
-      },
-      drawerActiveTintColor: '#D9D9D9', // Cor do ícone ativo no menu
-      drawerActiveBackgroundColor: '#4B5F83', // Cor de fundo do item de menu ativo
-    }}
-  >
+      drawerContent={(props) => <DrawerStyle {...props} />}
+      screenOptions={{
+        drawerLabelStyle: {
+          marginLeft: -25, // Define a margem esquerda para os itens do menu
+        },
+        headerStyle: {
+          backgroundColor: '#4B5F83', // Cor de fundo do cabeçalho
+        },
+        headerTintColor: '#D9D9D9', // Cor do texto do cabeçalho
+        headerTitleStyle: {
+          fontWeight: 'bold', // Estilo do texto do cabeçalho
+        },
+        drawerActiveTintColor: '#D9D9D9', // Cor do ícone ativo no menu
+        drawerActiveBackgroundColor: '#4B5F83', // Cor de fundo do item de menu ativo
+      }}
+    >
       <Drawer.Screen
         name="Home"
         component={Home}
@@ -64,9 +67,3 @@ export default function MyDrawer() {
     </Drawer.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  screenOptions: {
-    marginLeft: -25 // Correção na propriedade marginLeft
-  }
-});

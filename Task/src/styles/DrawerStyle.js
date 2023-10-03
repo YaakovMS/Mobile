@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerContentContainer: {
-    // Estilos para o conteúdo da lista de rotas
+   
   },
   userInfoContainer: {
     flexDirection: "row",
