@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { SafeAreaView } from 'react-native';
 import { CheckBox, Text } from "react-native-elements";
 import { Button, Input } from "@rneui/themed";
-import { TextInputMask } from "react-native-masked-text";
 import { useAuth } from "../context/AuthContext"; // Import the context hook
+import { SignUpStyle } from '../styles/SignUpStyle'; // Importe o estilo que você deseja
+
+
+const blueColor = "#4B5F83";
 
 export default function SignUp({ navigation }) {
   const { setRegisteredUser } = useAuth(); // Use the context hook
@@ -17,7 +20,7 @@ export default function SignUp({ navigation }) {
   const [erroNome, setErroNome] = useState(null);
   const [erroPassword, setErroPassword] = useState(null);
   const [erroConfirm, setErroConfirm] = useState(null);
-
+  const blueColor = "#4B5F83";
   const validar = () => {
     let erro = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -80,37 +83,37 @@ export default function SignUp({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <Text h3 style={[styles.heading, { color: "#2196F3" }]}>
+    <SafeAreaView style={SignUpStyle.container}>
+      <ScrollView contentContainerStyle={SignUpStyle.scrollViewContainer}>
+        <Text h3 style={[SignUpStyle.heading, { color: blueColor }]}>
           Tell me who are you
         </Text>
 
-        <View style={styles.form}>
+        <View style={SignUpStyle.form}>
           <Input
             placeholder="Name"
             onChangeText={setName}
-            inputStyle={styles.input}
+            inputStyle={SignUpStyle.input}
             errorMessage={erroNome}
           />
           <Input
             placeholder="Email"
             keyboardType="email-address"
             onChangeText={setEmail}
-            inputStyle={styles.input}
+            inputStyle={SignUpStyle.input}
             errorMessage={erroEmail}
           />
           <Input
             placeholder="Password"
             onChangeText={setPassword}
-            inputStyle={styles.input}
+            inputStyle={SignUpStyle.input}
             errorMessage={erroPassword}
             secureTextEntry
           />
           <Input
             placeholder="Confirm Password"
             onChangeText={setConfirmPassword}
-            inputStyle={styles.input}
+            inputStyle={SignUpStyle.input}
             errorMessage={erroConfirm}
             secureTextEntry
           />
@@ -119,7 +122,7 @@ export default function SignUp({ navigation }) {
             checkedIcon="check"
             uncheckedIcon="square-o"
             uncheckedColor="#dcdcdc"
-            checkedColor="#2196F3"
+            checkedColor = "#4B5F83"
             checked={isSelected}
             onPress={() => setSelected(!isSelected)}
           />
@@ -127,8 +130,8 @@ export default function SignUp({ navigation }) {
             title="Sign Up"
             loading={false}
             loadingProps={{ size: "small", color: "white" }}
-            buttonStyle={styles.signupButton}
-            titleStyle={styles.signupButtonText}
+            buttonStyle={SignUpStyle.signupButton}
+            titleStyle={SignUpStyle.signupButtonText}
             onPress={handleSignUp}
           />
         </View>
@@ -136,36 +139,3 @@ export default function SignUp({ navigation }) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  scrollViewContainer: {
-    flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 40,
-  },
-  heading: {
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  form: {
-    width: "80%",
-  },
-  input: {
-    marginBottom: 15,
-    color: "#2196F3",
-  },
-  signupButton: {
-    backgroundColor: "#2196F3",
-    borderRadius: 5,
-    width: "100%", // Make the button full width
-  },
-  signupButtonText: {
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-});

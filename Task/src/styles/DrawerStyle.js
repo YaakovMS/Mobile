@@ -43,7 +43,7 @@ const GavetaStyle = (props) => {
         <View style={styles.statsContainer}>
           <View style={styles.statItem}>
             <Ionicons
-              name="clipboard-outline"
+              name="folder-outline"
               size={24}
               color="white"
               style={styles.statIcon}
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   statsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "row",   //Muda direção dos items projeto e atividade de row para colu
+    justifyContent: "space-evenly",
   },
   statItem: {
     flexDirection: "row",
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderTopColor: "#4B5F83",
     borderTopWidth: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
   },
   bottomMenuItem: {
