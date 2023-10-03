@@ -1,22 +1,27 @@
-import React from 'react';
-import { View ,Text,StyleSheet} from 'react-native';
+// NovaAtividade.js
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
 
+const NovaAtividade = ({ onAddActivity }) => {
+  const [newActivityTitle, setNewActivityTitle] = useState('');
 
-function NovaAtividade() {
-    return ( 
-        <View style={styles.Container}>
-            <Text> Nova Atividade </Text>
-        </View>
-     );
-}
+  const addActivity = () => {
+    if (newActivityTitle.trim() === '') return;
+    onAddActivity(newActivityTitle);
+    setNewActivityTitle('');
+  };
 
-const styles = StyleSheet.create({
-    Container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 10,
-    },
-  });
+  return (
+    <View>
+      <Text>Nova Atividade:</Text>
+      <TextInput
+        placeholder="Digite o título da atividade"
+        value={newActivityTitle}
+        onChangeText={(text) => setNewActivityTitle(text)}
+      />
+      <Button title="Adicionar Atividade" onPress={addActivity} />
+    </View>
+  );
+};
 
 export default NovaAtividade;
