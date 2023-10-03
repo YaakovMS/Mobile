@@ -12,13 +12,17 @@ const Drawer = createDrawerNavigator();
 export default function MyDrawer() {
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <DrawerStyle {...props} />}
-      screenOptions={{ drawerLabelStyle:{marginLeft:-25},
-       drawerActiveTintColor:'#D9D9D9',
-       drawerActiveBackgroundColor:'#4B5F83'
-       }}
-      dr
-    >
+    drawerContent={(props) => <DrawerStyle {...props} />}
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#4B5F83', // Cor de fundo do cabeçalho
+      },
+      headerTintColor: '#D9D9D9', // Cor do texto do cabeçalho
+      headerTitleStyle: {
+        fontWeight: 'bold', // Estilo do texto do cabeçalho
+      },
+    }}
+  >
       <Drawer.Screen
         name="Home"
         component={Home}
