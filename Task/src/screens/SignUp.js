@@ -3,14 +3,14 @@ import { View, ScrollView } from "react-native";
 import { SafeAreaView } from 'react-native';
 import { CheckBox, Text } from "react-native-elements";
 import { Button, Input } from "@rneui/themed";
-import { useAuth } from "../context/AuthContext"; // Import the context hook
-import { SignUpStyle } from '../styles/SignUpStyle'; // Importe o estilo que você deseja
-
+import { useAuth } from "../context/AuthContext";
+import { SignUpStyle } from '../styles/SignUpStyle';
+import CustomInput from "../components/CostumeInput";
 
 const blueColor = "#4B5F83";
 
 export default function SignUp({ navigation }) {
-  const { setRegisteredUser } = useAuth(); // Use the context hook
+  const { setRegisteredUser } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ export default function SignUp({ navigation }) {
   const [erroNome, setErroNome] = useState(null);
   const [erroPassword, setErroPassword] = useState(null);
   const [erroConfirm, setErroConfirm] = useState(null);
-  const blueColor = "#4B5F83";
+
   const validar = () => {
     let erro = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -62,7 +62,6 @@ export default function SignUp({ navigation }) {
     }
 
     if (!isSelected) {
-      // Checkbox not selected
       setErroConfirm("Você deve aceitar os termos de uso");
       erro = true;
     }
@@ -72,12 +71,11 @@ export default function SignUp({ navigation }) {
 
   const handleSignUp = () => {
     if (validar()) {
-      setRegisteredUser({ name, email, password }); // Store the user info in context
-
+      setRegisteredUser({ name, email, password });
       console.log("Conta Nova");
       navigation.navigate("Login");
-      console.log("Nome do novo user:", name);
-      console.log("Email Novo", email);
+      console.log("Nome do novo usuário:", name);
+      console.log("Email Novo:", email);
       console.log("Senha Nova:", password);
     }
   };
@@ -86,43 +84,51 @@ export default function SignUp({ navigation }) {
     <SafeAreaView style={SignUpStyle.container}>
       <ScrollView contentContainerStyle={SignUpStyle.scrollViewContainer}>
         <Text h3 style={[SignUpStyle.heading, { color: blueColor }]}>
-          Tell me who are you
+         Bem-Vindo!!
         </Text>
 
         <View style={SignUpStyle.form}>
-          <Input
+          <CustomInput
             placeholder="Name"
             onChangeText={setName}
             inputStyle={SignUpStyle.input}
-            errorMessage={erroNome}
           />
-          <Input
+          {erroNome && (
+            <Text style={SignUpStyle.errorMessage}>{erroNome}</Text>
+          )}
+          <CustomInput
             placeholder="Email"
             keyboardType="email-address"
             onChangeText={setEmail}
             inputStyle={SignUpStyle.input}
-            errorMessage={erroEmail}
           />
-          <Input
+          {erroEmail && (
+            <Text style={SignUpStyle.errorMessage}>{erroEmail}</Text>
+          )}
+          <CustomInput
             placeholder="Password"
             onChangeText={setPassword}
             inputStyle={SignUpStyle.input}
-            errorMessage={erroPassword}
             secureTextEntry
           />
-          <Input
+          {erroPassword && (
+            <Text style={SignUpStyle.errorMessage}>{erroPassword}</Text>
+          )}
+          <CustomInput
             placeholder="Confirm Password"
             onChangeText={setConfirmPassword}
             inputStyle={SignUpStyle.input}
-            errorMessage={erroConfirm}
             secureTextEntry
           />
+          {erroConfirm && (
+            <Text style={SignUpStyle.errorMessage}>{erroConfirm}</Text>
+          )}
           <CheckBox
             title={"Eu aceito os termos de uso"}
             checkedIcon="check"
             uncheckedIcon="square-o"
             uncheckedColor="#dcdcdc"
-            checkedColor = "#4B5F83"
+            checkedColor="#4B5F83"
             checked={isSelected}
             onPress={() => setSelected(!isSelected)}
           />
@@ -137,5 +143,5 @@ export default function SignUp({ navigation }) {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
+  )
 }

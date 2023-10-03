@@ -21,6 +21,8 @@ export default function MyDrawer() {
       headerTitleStyle: {
         fontWeight: 'bold', // Estilo do texto do cabeçalho
       },
+      drawerActiveTintColor: '#D9D9D9', // Cor do ícone ativo no menu
+      drawerActiveBackgroundColor: '#4B5F83', // Cor de fundo do item de menu ativo
     }}
   >
       <Drawer.Screen

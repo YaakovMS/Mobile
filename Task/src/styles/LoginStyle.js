@@ -12,8 +12,13 @@ export const LoginStyle = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
+  inputContainer: {
+    width: '80%', // Ajuste a largura conforme necessário
+  },
   input: {
     marginBottom: 15,
+    padding: 20,
+    width: '100%', // Isso permite que os inputs ocupem todo o espaço disponível no container
   },
   loginButton: {
     borderRadius: 5,
