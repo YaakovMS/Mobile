@@ -15,7 +15,7 @@ const CustomInput = ({ placeholder, iconName, iconColor, ...restProps }) => {
       <TextInput
         label={placeholder}
         {...restProps}
-        style={{ flex: 1, borderWidth: 1, borderRadius: 5 }}
+        style={{ flex: 1, borderWidth: 1, borderRadius: 5, backgroundColor:'#F5F5F' ,color:'#4B5F83', width:80}}
       />
     </View>
   );

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const AtividadeStyle = StyleSheet.create({
   screenAtividades: {
     flex: 1,
-    backgroundColor: "#F5F5F5", // Define a cor de fundo
+    backgroundColor: "#F9F9F9", // Define a cor de fundo
     paddingHorizontal: 16, // Espaçamento horizontal interno
     paddingTop: 16, // Espaçamento superior interno
   },

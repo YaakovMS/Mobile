@@ -55,10 +55,11 @@ const NovaAtividade = () => {
 
   return (
     <View style={NovaAtividadeStyle.container}>
-      <Text style={NovaAtividadeStyle.title}>
+       <Text style={NovaAtividadeStyle.screenTitle}>Criar Nova Atividade:</Text>
+      <Text style={NovaAtividadeStyle.screenProjectId}>
         Projeto selecionado: {projetoId || 'Nenhum projeto selecionado'}
       </Text>
-      <Text>Criar Nova Atividade:</Text>
+      
       <CustomInput
         style={NovaAtividadeStyle.input}
         placeholder="Nova Atividade"

@@ -22,9 +22,10 @@ const ProjetosStyle = StyleSheet.create({
   },
   folderContainer: {
     flex: 1,
+   padding:3
   },
   folder: {
-    backgroundColor: '#fff',
+    backgroundColor: themeColor,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,

@@ -22,15 +22,19 @@ export const SignUpStyle = StyleSheet.create({
   input: {
     marginBottom: 15,
     color: "#4B5F83",
+  
   },
   signupButton: {
     backgroundColor: "#4B5F83",
-    borderRadius: 5,
-    width: "100%", // Make the button full width
+    marginTop: 20,
+    alignSelf: 'center',
+    width: '50%',
   },
   signupButtonText: {
     fontWeight: "bold",
     fontSize: 18,
+    borderRadius: 5,
   },
+ 
 });
 

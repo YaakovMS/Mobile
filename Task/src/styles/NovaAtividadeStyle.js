@@ -8,9 +8,16 @@ const NovaAtividadeStyle = StyleSheet.create({
     alignItems: 'center', // Centraliza horizontalmente os componentes
     padding: 16, // Adiciona um espaçamento interno
   },
-  title: {
+  screenTitle: {
+    fontSize: 28,
+    marginBottom: 16,
+    fontWeight:'bold',
+    color: '#4B5F83'
+  },
+  screenProjectId:{
     fontSize: 18,
     marginBottom: 16,
+    color: '#4B5F83'
   },
   input: {
     width: '100%', // Faz com que o campo de entrada ocupe a largura completa
@@ -19,6 +26,7 @@ const NovaAtividadeStyle = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 4,
     padding: 8,
+    color: '#4B5F83'
   },
   picker: {
     width: 300,

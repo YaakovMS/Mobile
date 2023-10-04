@@ -2,12 +2,12 @@ import React, { useState, useRef } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Modal, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProjetosStyle from '../styles/ProjetosStyle';
-import { useNavigation } from '@react-navigation/native'; // Importe o hook de navegação
+import { useNavigation } from '@react-navigation/native';
 
 const themeColor = '#4B5F83';
 
 const Projetos = () => {
-  const navigation = useNavigation(); // Obtém o objeto de navegação
+  const navigation = useNavigation();
 
   const [folders, setFolders] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -37,14 +37,13 @@ const Projetos = () => {
   };
 
   const navigateToAtividades = (projetoId) => {
-    // Navegar para a tela de Atividades e passar o projetoId como parâmetro
     navigation.navigate('Atividades', { projetoId });
   };
 
   const renderFolderItem = ({ item }) => (
     <TouchableOpacity style={ProjetosStyle.folder} onPress={() => navigateToAtividades(item.id)}>
-      <Icon name="folder" size={48} color={themeColor} /> 
-      <Text style={{ color: themeColor }}>{item.name}</Text>
+      <Icon name="folder" size={48} color={'#F5F5F5'} /> 
+      <Text style={{ color: '#F5F5F5' }}>{item.name}</Text>
     </TouchableOpacity>
   );
 
@@ -55,7 +54,7 @@ const Projetos = () => {
       </Text>
       <FlatList
         data={groupFolders(folders)}
-        keyExtractor={(item , index) => `row-${index}`}
+        keyExtractor={(item, index) => `row-${index}`}
         renderItem={({ item }) => (
           <View style={ProjetosStyle.folderRow}>
             {item.map((folder) => (
