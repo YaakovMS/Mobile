@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect , useState} from 'react';
 import { View, Text } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { useAtividades } from '../context/AtividadesContext';
@@ -8,24 +8,30 @@ import { verificarProjetoSelecionado } from '../context/ProjetoContext';
 
 const NovaAtividade = () => {
   const route = useRoute();
-  const { projetoId } = route.params;
   const navigation = useNavigation();
   const { useSalvarAtividade } = useAtividades();
   const salvarAtividade = useSalvarAtividade();
-
-  const [novaAtividade, setNovaAtividade] = useState('');
-  const [dataLimite, setDataLimite] = useState('');
-  const [prioridade, setPrioridade] = useState('Baixa'); // Valor padrão
-  const [descricao, setDescricao] = useState('');
+  const projetoId = route.params?.projetoId; // Usando ? para verificar se projetoId está definido
 
   useEffect(() => {
-    const projetoSelecionado = verificarProjetoSelecionado(projetoId, navigation);
-    if (!projetoSelecionado) {
+    if (!projetoId) {
+      // Se projetoId não estiver definido, redirecione para 'Projetos'
       navigation.navigate('Projetos');
     }
   }, [projetoId, navigation]);
 
+  const [novaAtividade, setNovaAtividade] = useState('');
+  const [dataLimite, setDataLimite] = useState('');
+  const [prioridade, setPrioridade] = useState('Baixa');
+  const [descricao, setDescricao] = useState('');
+
   const salvarNovaAtividade = () => {
+    if (!projetoId) {
+      // Se projetoId não estiver definido, redirecione para 'Projetos'
+      navigation.navigate('Projetos');
+      return;
+    }
+
     if (novaAtividade.trim() === '') {
       return;
     }
@@ -34,9 +40,9 @@ const NovaAtividade = () => {
       id: Math.random().toString(),
       nome: novaAtividade,
       projetoId: projetoId,
-      dataLimite: dataLimite, // Adicione a data limite à atividade
-      prioridade: prioridade, // Adicione a prioridade à atividade
-      descricao: descricao, // Adicione a descrição à atividade
+      dataLimite: dataLimite,
+      prioridade: prioridade,
+      descricao: descricao,
     };
 
     salvarAtividade(novaAtividadeObj);
@@ -48,7 +54,7 @@ const NovaAtividade = () => {
 
   return (
     <View>
-      <Text>Projeto selecionado: {projetoId}</Text>
+      <Text>Projeto selecionado: {projetoId || 'Nenhum projeto selecionado'}</Text>
       <Text>Criar Nova Atividade:</Text>
       <CustomInput
         placeholder="Nova Atividade"

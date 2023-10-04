@@ -7,14 +7,20 @@ import { verificarProjetoSelecionado } from '../context/ProjetoContext';
 
 const Atividades = () => {
   const route = useRoute();
-  const { projetoId } = route.params;
   const navigation = useNavigation();
   const { atividades } = useAtividades();
+  const projetoId = route.params?.projetoId; // Usando ? para verificar se projetoId está definido
 
   useEffect(() => {
+    if (!projetoId) {
+      // Se projetoId não estiver definido, redirecione para 'Projetos'
+      navigation.navigate('Projetos');
+      return;
+    }
+
     const projetoSelecionado = verificarProjetoSelecionado(projetoId, navigation);
     if (!projetoSelecionado) {
-      navigation.navigate('Projetos');
+      navigation.navigate('Projetos'); // Redireciona para 'Projetos' se o projeto não estiver selecionado
     }
   }, [projetoId, navigation]);
 
@@ -24,7 +30,7 @@ const Atividades = () => {
 
   return (
     <View>
-      <Text>Projeto selecionado: {projetoId}</Text>
+      <Text>Projeto selecionado: {projetoId || 'Nenhum projeto selecionado'}</Text>
       <Text>Atividades do Projeto:</Text>
       <FlatList
         data={atividadesDoProjeto}
@@ -47,3 +53,4 @@ const Atividades = () => {
 };
 
 export default Atividades;
+
