@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Modal, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ProjetosStyle from '../styles/ProjetosStyle' // Importe os estilos do arquivo separado
+import ProjetosStyle from '../styles/ProjetosStyle';
+import { useNavigation } from '@react-navigation/native'; // Importe o hook de navegação
 
 const themeColor = '#4B5F83';
 
 const Projetos = () => {
+  const navigation = useNavigation(); // Obtém o objeto de navegação
+
   const [folders, setFolders] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
@@ -33,11 +36,15 @@ const Projetos = () => {
     }
   };
 
+  const navigateToAtividades = (projetoId) => {
+    // Navegar para a tela de Atividades e passar o projetoId como parâmetro
+    navigation.navigate('Atividades', { projetoId });
+  };
+
   const renderFolderItem = ({ item }) => (
-    <TouchableOpacity style={ProjetosStyle.folder}>
+    <TouchableOpacity style={ProjetosStyle.folder} onPress={() => navigateToAtividades(item.id)}>
       <Icon name="folder" size={48} color={themeColor} /> 
       <Text style={{ color: themeColor }}>{item.name}</Text>
-
     </TouchableOpacity>
   );
 
@@ -48,7 +55,7 @@ const Projetos = () => {
       </Text>
       <FlatList
         data={groupFolders(folders)}
-        keyExtractor={(item, index) => `row-${index}`}
+        keyExtractor={(item , index) => `row-${index}`}
         renderItem={({ item }) => (
           <View style={ProjetosStyle.folderRow}>
             {item.map((folder) => (
@@ -63,21 +70,21 @@ const Projetos = () => {
         <Icon name="plus" size={32} color="#fff" />
       </TouchableOpacity>
       <Modal visible={isModalVisible} transparent={true} animationType="slide" onRequestClose={toggleModal}>
-  <View style={ProjetosStyle.modalContainer}>
-    <TextInput
-      ref={inputRef}
-      style={ProjetosStyle.input}
-      placeholder="Nome do Projeto"
-      onChangeText={(text) => setNewProjectName(text)}
-    />
-    <TouchableOpacity style={ProjetosStyle.createButton} onPress={handleCreateProject}>
-      <Text style={ProjetosStyle.createButtonText}>Criar Projeto</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={ProjetosStyle.closeButton} onPress={toggleModal}>
-      <Text style={ProjetosStyle.closeButtonText}>Fechar</Text>
-    </TouchableOpacity>
-  </View>
-</Modal>
+        <View style={ProjetosStyle.modalContainer}>
+          <TextInput
+            ref={inputRef}
+            style={ProjetosStyle.input}
+            placeholder="Nome do Projeto"
+            onChangeText={(text) => setNewProjectName(text)}
+          />
+          <TouchableOpacity style={ProjetosStyle.createButton} onPress={handleCreateProject}>
+            <Text style={ProjetosStyle.createButtonText}>Criar Projeto</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={ProjetosStyle.closeButton} onPress={toggleModal}>
+            <Text style={ProjetosStyle.closeButtonText}>Fechar</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };
