@@ -11,11 +11,9 @@ const Atividades = () => {
   const navigation = useNavigation();
   const { atividades } = useAtividades();
 
-  // Verifique o projeto selecionado ao entrar na tela
   useEffect(() => {
     const projetoSelecionado = verificarProjetoSelecionado(projetoId, navigation);
     if (!projetoSelecionado) {
-      // Se não houver projeto selecionado, redirecione para a tela de projetos
       navigation.navigate('Projetos');
     }
   }, [projetoId, navigation]);
@@ -31,7 +29,14 @@ const Atividades = () => {
       <FlatList
         data={atividadesDoProjeto}
         keyExtractor={(atividade) => atividade.id}
-        renderItem={({ item }) => <Text>{item.nome}</Text>}
+        renderItem={({ item }) => (
+          <View>
+            <Text>Nome: {item.nome}</Text>
+            <Text>Data Limite: {item.dataLimite}</Text>
+            <Text>Prioridade: {item.prioridade}</Text>
+            <Text>Descrição: {item.descricao}</Text>
+          </View>
+        )}
       />
       <Button
         onPress={() => navigation.navigate('Nova Atividade', { projetoId: projetoId })}
