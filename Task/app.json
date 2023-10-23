@@ -4,12 +4,14 @@
     "slug": "Task",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/pastaLogo02.png",
+    "icon": "./src/assets/pastaLogo03.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/pastaLogo02.png",
+      "image": "./src/assets/pastaLogo03.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4B5F83",
+      "height": 50,
+      "width": 50
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,7 +22,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/pastaLogo03.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#4B5F83",
+        "height": 50,
+        "width": 50
       }
     },
     "web": {
